@@ -45,4 +45,12 @@
         tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toRightOf="@+id/buttonOnOff" />
 
+    <Button
+        android:id="@+id/buttonDraw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Draw"
+        tools:layout_editor_absoluteX="136dp"
+        tools:layout_editor_absoluteY="412dp" />
+
 </android.support.constraint.ConstraintLayout>

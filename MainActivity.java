@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     int REQUEST_ENABLE_BT = 1;
 
     Button buttonDiscoverable;
+    Button buttonDraw;
 
     // Create a BroadcastReceiver for ACTION_FOUND.
     private final BroadcastReceiver myBroadcastReceiver1 = new BroadcastReceiver() {
@@ -91,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
         // button
         Button buttonOnOff = (Button) findViewById(R.id.buttonOnOff);
         buttonDiscoverable = (Button) findViewById(R.id.buttonDiscoverable);
+        buttonDraw = (Button) findViewById(R.id.buttonDraw);
 
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
@@ -101,7 +103,15 @@ public class MainActivity extends AppCompatActivity {
                 enableDisableBT();
             }
         });
-
+        buttonDraw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent k = new Intent(MainActivity.this, DrawScreen.class);
+                startActivity(k);
+                //finish();
+                //setContentView(R.layout.activity_draw_screen);
+            }
+        });
     }
 
     public void enableDisableBT() {
