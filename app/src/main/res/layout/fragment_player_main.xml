@@ -10,7 +10,7 @@
     <scriddle.dooble.DrawingView
         android:id="@+id/drawing"
         android:layout_width="fill_parent"
-        android:layout_height="313dp"
+        android:layout_height="304dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
@@ -20,10 +20,9 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/btnDone"
+        android:layout_below="@+id/drawing"
         android:layout_gravity="center"
-        android:layout_marginBottom="54dp"
         android:orientation="vertical">
         <!-- Top Row -->
         <LinearLayout
@@ -175,25 +174,29 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/btnDone"
+        android:layout_alignParentEnd="true"
         android:layout_below="@+id/drawing"
-        android:orientation="horizontal">
-
-        <ImageButton
-            android:id="@+id/erase_btn"
-            android:layout_width="94dp"
-            android:layout_height="142dp"
-            android:background="@null"
-            android:cropToPadding="false"
-            android:src="@drawable/eraser" />
+        android:layout_marginEnd="36dp"
+        android:orientation="horizontal"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="36dp">
 
         <ImageButton
             android:id="@+id/draw_btn"
             android:layout_width="42dp"
-            android:layout_height="129dp"
+            android:layout_height="match_parent"
             android:background="@null"
             android:scaleType="centerInside"
             android:src="@drawable/brush" />
+
+        <ImageButton
+            android:id="@+id/erase_btn"
+            android:layout_width="94dp"
+            android:layout_height="116dp"
+            android:background="@null"
+            android:cropToPadding="false"
+            android:scaleType="fitCenter"
+            android:src="@drawable/eraser" />
 
     </LinearLayout>
 
@@ -204,9 +207,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:background="#f24a72"
         android:text="DONE"
-        android:textColor="#fff"
-        android:background="#ff9898"/>
+        android:textColor="#fff" />
 
     <TextView
         android:id="@+id/tvTopic"
@@ -222,7 +226,8 @@
         android:textColor="#fff"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:fontFamily="@font/purple_purse" />
+        app:fontFamily="@font/purple_purse"
+        android:layout_alignParentLeft="true" />
 
     <TextView
         android:id="@+id/tvScore"
@@ -234,15 +239,6 @@
         android:text="Score: 0"
         android:gravity="center"
         android:textColor="#fff" />
-
-    <ImageView
-        android:id="@+id/imgDebug"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="70dp"
-        app:srcCompat="@mipmap/dooble_launcher" />
 
 
 </RelativeLayout>

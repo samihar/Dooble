@@ -40,6 +40,7 @@ public class PlayerMainFragment extends Fragment {
     private ImageButton btnColor7, btnColor8, btnColor9, btnColor10, btnColor11, btnColor12;
 
     TextView tvTopic;
+    TextView tvScore;
 
     public interface PaintScreenListener {
         void onSendSelected(byte[] imgSend);
@@ -69,6 +70,8 @@ public class PlayerMainFragment extends Fragment {
 
         initializeColorButtons();
 
+        tvScore = (TextView) mRelativeLayout.findViewById(R.id.tvScore);
+
 
         currPaint = (ImageButton)paintLayout.getChildAt(0);
         currPaint.setImageDrawable(getResources().getDrawable(R.drawable.paint_pressed));
@@ -81,22 +84,18 @@ public class PlayerMainFragment extends Fragment {
             }
         });
 
-        imgDebug = (ImageView) mRelativeLayout.findViewById(R.id.imgDebug);
-
         smallBrush = getResources().getInteger(R.integer.small_size);
         mediumBrush = getResources().getInteger(R.integer.medium_size);
         largeBrush = getResources().getInteger(R.integer.large_size);
 
         topMenuButtons();
     }
-    ImageView imgDebug;
 
     public void btnDoneExecute()
     {
 
         Bitmap original = getBitmapFromView(drawView);
-        Bitmap drawing = resize(original, 100,100);
-        imgDebug.setImageBitmap(drawing);
+        Bitmap drawing = resize(original, 200,200);
 
         ByteArrayOutputStream imbytes = new ByteArrayOutputStream();
         drawing.compress(Bitmap.CompressFormat.JPEG, 100, imbytes);
@@ -145,25 +144,9 @@ public class PlayerMainFragment extends Fragment {
     }
 
 
-    /*
-    public static void saveFile(Context context, Bitmap b, String picName){
-        //FileOutputStream fos;
-        FileOutputStream fos = new FileOutputStream();
-        try {
-            fos = context.openFileOutput(picName, Context.MODE_PRIVATE);
-            b.compress(Bitmap.CompressFormat.PNG, 100, fos);
-        }
-        catch (FileNotFoundException e) {
-            Log.d("TAG", "file not found");
-            e.printStackTrace();
-        }
-        catch (IOException e) {
-            Log.d("TAG", "io exception");
-            e.printStackTrace();
-        } finally {
-            fos.close();
-        }
-    }*/
+    public void settvScore(String setMe) {
+        tvScore.setText(setMe);
+    }
 
     public void settvTopc(String setMe) {
         tvTopic.setText(setMe);
@@ -227,69 +210,7 @@ public class PlayerMainFragment extends Fragment {
                 sizeChooser("Eraser Size");
             }
         });
-/*
-        newBtn = (Button)mRelativeLayout.findViewById(R.id.new_btn);
-        newBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder newDialog = new AlertDialog.Builder(getContext());
-                newDialog.setTitle("New drawing");
-                newDialog.setMessage("Start new drawing (you will lose the current drawing)?");
-                newDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener(){
-                    public void onClick(DialogInterface dialog, int which){
-                        drawView.startNew();
-                        dialog.dismiss();
-                    }
-                });
-                newDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener(){
-                    public void onClick(DialogInterface dialog, int which){
-                        dialog.cancel();
-                    }
-                });
-                newDialog.show();
-            }
-        });
 
-        saveBtn = (Button)mRelativeLayout.findViewById(R.id.save_btn);
-        saveBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder saveDialog = new AlertDialog.Builder(getContext());
-                saveDialog.setTitle("Save drawing");
-                saveDialog.setMessage("Save drawing to device Gallery?");
-                saveDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener(){
-                    public void onClick(DialogInterface dialog, int which){
-                        //save drawing
-                        drawView.setDrawingCacheEnabled(true);
-                        String imgSaved = MediaStore.Images.Media.insertImage(
-                                getContext().getContentResolver(), drawView.getDrawingCache(),
-                                UUID.randomUUID().toString()+".png", "drawing");
-
-                        if(imgSaved!=null){
-                            Toast savedToast = Toast.makeText(getContext().getApplicationContext(),
-                                    "Drawing saved to Gallery!", Toast.LENGTH_SHORT);
-                            savedToast.show();
-                        }
-                        else{
-                            Toast unsavedToast = Toast.makeText(getContext().getApplicationContext(),
-                                    "Oops! Image could not be saved.", Toast.LENGTH_SHORT);
-                            unsavedToast.show();
-                        }
-
-                        drawView.destroyDrawingCache();
-                    }
-                });
-                saveDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener(){
-                    public void onClick(DialogInterface dialog, int which){
-                        dialog.cancel();
-                    }
-                });
-                saveDialog.show();
-
-
-
-            }
-        });*/
     }
 
     void initializeColorButtons()

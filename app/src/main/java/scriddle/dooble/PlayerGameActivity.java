@@ -16,6 +16,9 @@ import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.nio.charset.Charset;
 import java.util.UUID;
@@ -30,6 +33,7 @@ public class PlayerGameActivity extends AppCompatActivity
     PlayerBeginFragment beginFragment;
     PlayerMainFragment mainFragment;
     PlayerScoreFragment scoreFragment;
+    PlayerWaitFragment waitFragment;
 
     GameConnection mGameConnection;
     BluetoothAdapter mBluetoothAdapter;
@@ -46,6 +50,7 @@ public class PlayerGameActivity extends AppCompatActivity
     public static final String IMAGE_CODE = "hdfgwekkjfer;nferfjdwjdwdk";
     public static final String TEXT_CODE = "765e67it732yieuhfknnpb83yuf3d";
     int mplayer;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +80,7 @@ public class PlayerGameActivity extends AppCompatActivity
         beginFragment = new PlayerBeginFragment();
         mainFragment = new PlayerMainFragment();
         scoreFragment = new PlayerScoreFragment();
+        waitFragment = new PlayerWaitFragment();
 
         beginScreen();
     }
@@ -116,13 +122,16 @@ public class PlayerGameActivity extends AppCompatActivity
         Log.d(TAG, "startBTConnection: Initializing RFCOM Bluetooth Connection.");
         mGameConnection.startClient(mDevice,mUUID);
 
+        setWaitFragment();
 
+    }
+
+    public void setWaitFragment() {
         // begin transaction
         android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         // replace container with new fragment
-        fragmentTransaction.replace(R.id.placeholder, mainFragment);
+        fragmentTransaction.replace(R.id.placeholder, waitFragment);
         fragmentTransaction.commit();
-
     }
 
     public void deviceSelected(String deviceName, String deviceAddress, BluetoothDevice device) {
@@ -174,6 +183,8 @@ public class PlayerGameActivity extends AppCompatActivity
         Log.d(TAG, String.valueOf(imgSend));
         ret = mGameConnection.write(imgSend);
         while (ret != 1){ ; }
+        setWaitFragment();
+
 
     }
 
@@ -195,7 +206,7 @@ public class PlayerGameActivity extends AppCompatActivity
     int mScore;
 
     public void setScore() {
-        String updateWinner = "You lost!";
+        String updateWinner = "Awww, get 'em next time!";
         if (winner == mplayer) {
             mScore++;
             updateWinner = "You Won!";
@@ -248,6 +259,7 @@ public class PlayerGameActivity extends AppCompatActivity
 
 
     public void setTopic(String topic) {
+        mainFragment.settvScore("Score: " + String.valueOf(mScore));
         mainFragment.settvTopc(topic);
     }
 }

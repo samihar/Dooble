@@ -20,11 +20,7 @@ public class GameConnection {
     private static final int bufSize = 5000;
 
     private static final String TAG = "GameConnection";
-    private static UUID mUUID;//  = UUID.fromString("8ce255c0-200a-11e0-ac64-0800200c9a66");
-    //private static final UUID m2UUID = UUID.fromString("88d30118-60d2-4bc2-a54f-238b1a369fc8");
-
-    //private static final UUID m1UUID  = UUID.fromString("8ce255c0-200a-11e0-ac64-0800200c9a66");
-    //private static final UUID m2UUID = UUID.fromString("fdd51efb-0a10-4d27-bd82-1ef5451d8b8a");
+    private static UUID mUUID;
 
     //THE CODES FOR THE STRING TEXTS
     public static final String IMAGE_CODE = "hdfgwekkjfer;nferfjdwjdwdk";
@@ -507,27 +503,6 @@ public class GameConnection {
     // write to the connectedThread in an unsycnrhocnized manner
     // out - bytes to write (ConnectedThread write(byte[]))
     public int write(byte[] out) {
-        /*
-        for (int i = 0; i <mThreads.size(); i++) {
-            try {
-                // Create temporary object
-                ConnectedThread r;
-
-                // Synchronize a copy of the ConnectedThread
-                synchronized (this) {
-                    r = mThreads.get(i);
-                }
-
-                r.write(out);
-
-
-            } catch (Exception e) {
-
-            }
-        }*/
-
-        // Create temporary object
-        ConnectedThread r; // lmao what is this for
 
         // Synchronize a copy of the ConnectedThread
         Log.d(TAG, "write: Write Called.");

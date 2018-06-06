@@ -24,7 +24,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp"
         android:scaleType="fitCenter"
-        app:srcCompat="@mipmap/dooble_launcher_foreground" />
+        app:srcCompat="@mipmap/dooble_launcher_foreground"
+        android:background="@null" />
 
     <ImageButton
         android:id="@+id/imgBtnPlayer2"
@@ -34,7 +35,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="53dp"
         android:scaleType="fitCenter"
-        app:srcCompat="@mipmap/dooble_launcher_foreground" />
+        app:srcCompat="@mipmap/dooble_launcher_foreground"
+        android:background="@null" />
 
 
 </RelativeLayout>

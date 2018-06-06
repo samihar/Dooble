@@ -6,14 +6,14 @@
 
     <TextView
         android:id="@+id/tvUpdate"
-        android:layout_width="290dp"
+        android:layout_width="324dp"
         android:layout_height="206dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:gravity="center"
-        android:text="You Win!"
+        android:text="Aww, get 'em next time!"
         android:textColor="#f24a72"
-        android:textSize="60sp"
+        android:textSize="45sp"
         app:fontFamily="@font/purple_purse" />
 
     <TextView
@@ -24,21 +24,21 @@
         android:layout_centerHorizontal="true"
         android:gravity="center"
         android:text="your current score is: "
-        android:textColor="#f24a72"
+        android:textColor="#000000"
         android:textSize="35sp"
         app:fontFamily="@font/purple_purse" />
 
     <TextView
         android:id="@+id/tvScore"
-        android:layout_width="237dp"
-        android:layout_height="71dp"
+        android:layout_width="226dp"
+        android:layout_height="138dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="202dp"
+        android:layout_marginBottom="135dp"
         android:gravity="center"
         android:text="0"
-        android:textColor="#000000"
-        android:textSize="35sp"
+        android:textColor="#f24a72"
+        android:textSize="75sp"
         app:fontFamily="@font/purple_purse" />
 
     <TextView
@@ -50,7 +50,7 @@
         android:layout_marginBottom="28dp"
         android:gravity="center"
         android:text="waiting for next round to begin..."
-        android:textColor="#efa4b7"
+        android:textColor="#000000"
         android:textSize="20sp"
         app:fontFamily="@font/purple_purse" />
 

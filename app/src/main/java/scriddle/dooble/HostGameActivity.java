@@ -9,6 +9,7 @@ import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
+import android.support.annotation.RestrictTo;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -42,6 +43,9 @@ public class HostGameActivity extends AppCompatActivity
 
     boolean Player1Sending;
     boolean Player2Sending;
+    boolean Player1done;
+    boolean Player2done;
+    int[] Scores;
 
     int mode;
 
@@ -50,6 +54,7 @@ public class HostGameActivity extends AppCompatActivity
     HostBeginFragment beginFragment;
     HostSelectTopicFragment selectTopicFragment;
     HostJudgeFragment judgeFragment;
+    HostWaitFragment waitFragment;
 
     BluetoothAdapter mBluetoothAdapter;
     GameConnection mGameConnection;
@@ -69,15 +74,21 @@ public class HostGameActivity extends AppCompatActivity
         beginFragment = new HostBeginFragment();
         selectTopicFragment = new HostSelectTopicFragment();
         judgeFragment = new HostJudgeFragment();
+        waitFragment = new HostWaitFragment();
         Players = new ArrayList<>();
         Bitmaps = new Bitmap[2];
+        Scores = new int[2];
         Bitmaps[0] = null;
         Bitmaps[1] = null;
+        Scores[0] = 0;
+        Scores[1] = 0;
 
         beginScreen();
         mode = TEXT_MODE;
         Player1Sending = false;
         Player2Sending = false;
+        Player1done = false;
+        Player2done = false;
         countOfImgsRecieved = 0;
 
         LocalBroadcastManager.getInstance(this).registerReceiver(mReceiver, new IntentFilter("incomingMessage"));
@@ -86,6 +97,8 @@ public class HostGameActivity extends AppCompatActivity
         LocalBroadcastManager.getInstance(this).registerReceiver(mP1ImageReceiver, new IntentFilter("Player1Image"));
         LocalBroadcastManager.getInstance(this).registerReceiver(mP2ImageReceiver, new IntentFilter("Player2Image"));
     }
+
+
 
     @Override
     protected void onResume() {
@@ -116,6 +129,18 @@ public class HostGameActivity extends AppCompatActivity
         fragmentTransaction.commit();
         fragmentManager.executePendingTransactions();
         while(!selectTopicFragment.isAdded()){}
+    }
+
+    public void setWaitFragment()
+    {
+        // begin transaction
+        android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        // replace container with new fragment
+        fragmentTransaction.replace(R.id.placeholder, waitFragment);
+        fragmentTransaction.commit();
+        fragmentManager.executePendingTransactions();
+        while(!waitFragment.isAdded()){}
+        waitFragment.updateScores(Scores);
     }
 
     public void onReadySelected() {
@@ -158,6 +183,11 @@ public class HostGameActivity extends AppCompatActivity
 
     public void sendWinner (int winner)
     {
+        if (winner == 1)
+            Scores[0] ++;
+        else
+            Scores[1] ++;
+
         String sendMe = "winner" + String.valueOf(winner);
 
         byte[] textModeBytes = TEXT_CODE.getBytes(Charset.defaultCharset());
@@ -185,7 +215,8 @@ public class HostGameActivity extends AppCompatActivity
     public void onSendTopic(String topic)
     {
         String sendMe = "topic" + topic;
-
+        Player1done = false;
+        Player2done = false;
         byte[] textModeBytes = TEXT_CODE.getBytes(Charset.defaultCharset());
         int ret0 = 0;
         int ret1 = 0;
@@ -205,6 +236,7 @@ public class HostGameActivity extends AppCompatActivity
         ret1 = Players.get(1).write(bytes);
 
         while ((ret0 != 1) && (ret1 != 1)){ ; }
+        setWaitFragment();
         //while (ret0 != 1){ ; }
 
         /*
@@ -234,7 +266,10 @@ public class HostGameActivity extends AppCompatActivity
             Bitmaps[0] = bm;
             Player1Sending = false;
             countOfImgsRecieved++;
-
+            Player1done = true;
+            if (Player1done && Player2done){
+                goToJudgingMode();
+            }
         }
     };
 
@@ -249,7 +284,10 @@ public class HostGameActivity extends AppCompatActivity
             Bitmaps[1] = bm;
             Player2Sending = false;
             countOfImgsRecieved++;
-            goToJudgingMode();
+            Player2done = true;
+            if (Player1done && Player2done){
+                goToJudgingMode();
+            }
         }
     };
 
