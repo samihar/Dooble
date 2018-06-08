@@ -154,6 +154,14 @@ public class PlayerGameActivity extends AppCompatActivity
 
     }
 
+    @Override
+    protected void onDestroy() {
+        Log.d(TAG, "onDestroy called");
+        super.onDestroy();
+        unregisterReceiver(mReceiver);
+        unregisterReceiver(mImageReceiver);
+    }
+
     public void onSendSelected(byte[] imgSend)
     {
 

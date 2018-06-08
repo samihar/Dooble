@@ -143,6 +143,15 @@ public class HostGameActivity extends AppCompatActivity
         waitFragment.updateScores(Scores);
     }
 
+    @Override
+    protected void onDestroy() {
+        Log.d(TAG, "onDestroy called");
+        super.onDestroy();
+        unregisterReceiver(mReceiver);
+        unregisterReceiver(mP2ImageReceiver);
+        unregisterReceiver(mP1ImageReceiver);
+    }
+
     public void onReadySelected() {
 
         //cancel discovery
