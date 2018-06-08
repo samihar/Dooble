@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/tvUpdate"
+        android:layout_width="324dp"
+        android:layout_height="206dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="Aww, get 'em next time!"
+        android:textColor="#f24a72"
+        android:textSize="45sp"
+        app:fontFamily="@font/purple_purse" />
+
+    <TextView
+        android:id="@+id/tvScoreText"
+        android:layout_width="337dp"
+        android:layout_height="120dp"
+        android:layout_below="@+id/tvUpdate"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="your current score is: "
+        android:textColor="#000000"
+        android:textSize="35sp"
+        app:fontFamily="@font/purple_purse" />
+
+    <TextView
+        android:id="@+id/tvScore"
+        android:layout_width="226dp"
+        android:layout_height="138dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="135dp"
+        android:gravity="center"
+        android:text="0"
+        android:textColor="#f24a72"
+        android:textSize="75sp"
+        app:fontFamily="@font/purple_purse" />
+
+    <TextView
+        android:id="@+id/tvWaiting"
+        android:layout_width="301dp"
+        android:layout_height="102dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="28dp"
+        android:gravity="center"
+        android:text="waiting for next round to begin..."
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:fontFamily="@font/purple_purse" />
+
+
+</RelativeLayout>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <ListView
+        android:id="@+id/lvNewDevices"
+        android:layout_width="251dp"
+        android:layout_height="310dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="31dp"
+        android:scrollbarStyle="outsideOverlay"
+        android:scrollbars="vertical"
+        android:scrollingCache="true"
+        android:smoothScrollbar="true" />
+
+    <Button
+        android:id="@+id/btnConnect"
+        android:layout_width="175dp"
+        android:layout_height="100dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="58dp"
+        android:background="#FFF2994A"
+        android:text="JOIN"
+        app:fontFamily="@font/purple_purse"
+        android:textColor="#fff"
+        android:textSize="36sp" />
+
+</RelativeLayout>
